@@ -1,26 +1,34 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
-        required: true
+        required: [true, "Product title is required"]
     },
-    description: {
-        type: String,
-        required: true
-    },
+  
     price: {
         type: Number,
         required: true
     },
-    image: {
-        type: String,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
+
+   
+    rating:{
+            type: Number,
+            default:0
         },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
+    company:{
+        type: String,
+        // enum:['ikea','liddy','caressa','marcos']
+        enum:{
+            values:["ikea","liddy","caressa","marcos"],
+            message:"{VALUE} is not supported"
+        },
+    },
+
 },{
     timestamps: true
 });
